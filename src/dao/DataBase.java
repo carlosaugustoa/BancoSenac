@@ -12,9 +12,9 @@ public class DataBase {
     private final String URL = "jdbc:mysql://localhost:3306/";
     private final String BANCO = URL + "db_teste";
     private final String USUARIO = "root";
-    private final String SENHA = "151139";
+    private final String SENHA = "SENAC";
         
-    public boolean getConnection() {
+    public boolean connect() {
         try {
             Class.forName(DRIVER);
             Connection connect = DriverManager.getConnection(BANCO,USUARIO,SENHA);

@@ -4,12 +4,12 @@ public class Cliente {
 
     private int id;
     private String nome;
-    private String sexo;
+    private Sexo sexo;
     private String cpf;
     
     public Cliente (){}
     
-    public Cliente (String nome, String sexo, String cpf){
+    public Cliente (String nome, Sexo sexo, String cpf){
         this.nome = nome;
         this.sexo = sexo;
         this.cpf = cpf;
@@ -31,11 +31,11 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getSexo() {
+    public Sexo getSexo() {
         return sexo;
     }
 
-    public void setSexo(String sexo) {
+    public void setSexo(Sexo sexo) {
         this.sexo = sexo;
     }
 
@@ -49,7 +49,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente{" + "id=" + id + ", nome=" + nome + ", sexo=" + sexo + ", cpf=" + cpf + '}';
+        return "Cliente{" + "id=" + id + ", nome=" + nome + ", sexo=" + sexo.toString() + ", cpf=" + cpf + '}';
     }
     
    
