@@ -17,7 +17,7 @@ public class DataBase {
     public boolean connect() {
         try {
             Class.forName(DRIVER);
-            Connection connect = DriverManager.getConnection(BANCO,USUARIO,SENHA);
+            Connection conexao = DriverManager.getConnection(BANCO,USUARIO,SENHA);
             System.out.println("CONECTOU");
             return true;
         } catch (ClassNotFoundException erro){

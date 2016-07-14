@@ -28,8 +28,12 @@ public class ClienteDao {
                 ps.setString(2, cliente.getCpf());
                 ps.setInt(3, cliente.getSexo().getId());
                 if (ps.executeUpdate() == 1){
+                    ps.close();
+                    db.disconnect();
                     return true;
                 }
+                ps.close();
+                db.disconnect();
             } catch (SQLException error){
                 return false;
             }
@@ -45,8 +49,12 @@ public boolean excluir(Cliente cliente){
                 ps = db.conexao.prepareStatement(sql);
                 ps.setInt(1, cliente.getId());
                 if (ps.executeUpdate() == 1){
+                    ps.close();
+                    db.disconnect();
                     return true;
                 }
+                ps.close();
+                db.disconnect();
             } catch (SQLException error){
                 return false;
             }
@@ -64,8 +72,12 @@ public boolean editar(Cliente cliente){
                 ps.setInt(3, cliente.getSexo().getId());
                 ps.setInt(4, cliente.getId());
                 if (ps.executeUpdate() == 1){
+                     ps.close();
+                    db.disconnect();
                     return true;
                 }
+                ps.close();
+                db.disconnect();
             } catch (SQLException error){
                 return false;
             }
@@ -93,6 +105,9 @@ public List<Cliente> buscarTudo(){
                     cliente.setSexo(sexo);
                     clientes.add(cliente);
                 }
+                rs.close();
+                ps.close();
+                db.disconnect();
                 return clientes;
             } catch (SQLException error){
                 return null;
@@ -106,23 +121,26 @@ public Cliente buscarPorCpf(String cpf){
     
         if (db.connect()){
             
-            sql = "SELECT * FROM tb_clientes JOIN tb_sexos ON sex_id = cli_sex_id WHERE cli_cpf = ?";
+            sql = "SELECT * FROM tb_clientes WHERE cli_cpf = ?";
             try {
                 ps = db.conexao.prepareStatement(sql);
                 ps.setString(1,cpf);
                 rs = ps.executeQuery();
                 if (rs.next()){
                     Cliente cliente = new Cliente();
-                    Sexo sexo = new Sexo();
+                    SexoDao dao = new SexoDao();
                     cliente.setId(rs.getInt("cli_id"));
                     cliente.setNome(rs.getString("cli_nome"));
                     cliente.setCpf(rs.getString("cli_cpf"));
-                    sexo.setId(rs.getInt("sex_id"));
-                    sexo.setSexo(rs.getString("sex_sexo"));
-                    sexo.setSigla(rs.getString("sex_sigla").charAt(0));
-                    cliente.setSexo(sexo);
+                    cliente.setSexo(dao.buscarPorId(rs.getInt("cli_sex_id")));
+                    rs.close();
+                    ps.close();
+                    db.disconnect();
                     return cliente;
-                }               
+                }
+                rs.close();
+                ps.close();
+                db.disconnect();              
             } catch (SQLException error){
                 return null;
             }
