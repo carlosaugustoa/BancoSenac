@@ -11,7 +11,7 @@ public class ClienteController {
         SexoDao sdao = new SexoDao();
         if (sdao.buscarPorSexo(sexo) != null){
             Sexo s = sdao.buscarPorSexo(sexo);
-            Cliente cliente = new Cliente(nome, s, cpf);
+            Cliente cliente = new model.Cliente(nome, s, cpf);
             ClienteDao cdao = new ClienteDao();
             if (cdao.inserir(cliente)){
                 return true;
@@ -22,14 +22,10 @@ public class ClienteController {
     
     public void listar(){
         ClienteDao cdao = new ClienteDao();
-        for (Cliente c : cdao.buscarTudo()){
+        for (Cliente c: cdao.buscarTudo()){
             System.out.println(c.toString());      
-//            System.out.println(
-//                    "Id. " + c.getId() +
-//                    "\tCPF: " + c.getCpf()) +
-//                    "\tNome: " + c.getNome() +
-//                    "\tSexo: " + c.getSexo().getSigla()
-//            );
+            System.out.println("Id. " + c.getId() + "\tCPF: " + c.getCpf() +
+                "\tNome: " + c.getNome() + "\tSexo: " + c.getSexo().getSigla());
         }
     }
     
@@ -41,7 +37,8 @@ public class ClienteController {
     //        }
     //    return false;
     //    }
-}   
+}
+   
     
     
 

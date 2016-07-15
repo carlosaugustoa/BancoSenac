@@ -64,7 +64,8 @@ public boolean excluir(Cliente cliente){
 
 public boolean editar(Cliente cliente){
        if (db.connect()){
-            sql = "UPADATE tb_clientes SET cli_nome = ?, cli_cpf = ?, cli_sex_id = ? WHERE cli_id = ?)";
+            sql = "UPADATE tb_clientes SET cli_nome = ?, cli_cpf = ?,"
+                    + "cli_sex_id = ? WHERE cli_id = ?)";
             try {
                 ps = db.conexao.prepareStatement(sql);
                 ps.setString(1, cliente.getNome());
@@ -89,7 +90,8 @@ public boolean editar(Cliente cliente){
 public List<Cliente> buscarTudo(){
          if (db.connect()){
             List<Cliente> clientes = new ArrayList();
-            sql = "SELECT * FROM tb_clientes JOIN tb_sexos ON sex_id = cli_sex_id)";
+            sql = "SELECT * FROM tb_clientes JOIN tb_sexos ON sex_id"
+                    + "= cli_sex_id)";
             try {
                 ps = db.conexao.prepareStatement(sql);
                 ps.executeQuery();
@@ -148,7 +150,36 @@ public Cliente buscarPorCpf(String cpf){
         return null; 
 }
 
-
+public Cliente buscarPorId(int id){
+    
+        if (db.connect()){
+            
+            sql = "SELECT * FROM tb_clientes WHERE cli_id = ?";
+            try {
+                ps = db.conexao.prepareStatement(sql);
+                ps.setInt(1,id);
+                rs = ps.executeQuery();
+                if (rs.next()){
+                    Cliente cliente = new Cliente();
+                    SexoDao dao = new SexoDao();
+                    cliente.setId(rs.getInt("cli_id"));
+                    cliente.setNome(rs.getString("cli_nome"));
+                    cliente.setCpf(rs.getString("cli_cpf"));
+                    cliente.setSexo(dao.buscarPorId(rs.getInt("cli_sex_id")));
+                    rs.close();
+                    ps.close();
+                    db.disconnect();
+                    return cliente;
+                }
+                rs.close();
+                ps.close();
+                db.disconnect();              
+            } catch (SQLException error){
+                return null;
+            }
+        }
+        return null; 
+}
 
 
 

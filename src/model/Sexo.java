@@ -32,7 +32,8 @@ public class Sexo {
 
     @Override
     public String toString() {
-        return "Sexo{" + "id=" + id + ", sexo=" + sexo + ", sigla=" + sigla + '}';
+        return "Sexo{" + "id=" + id + ", sexo=" + sexo + ", sigla="
+                + sigla + '}';
     }
     
     

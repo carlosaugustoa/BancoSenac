@@ -1,26 +1,23 @@
 package view;
 
 import Controller.ClienteController;
-import dao.ClienteDao;
-import dao.SexoDao;
+import Controller.ContaController;
 import java.util.Scanner;
 
-public class ClienteGUi{
-    
+public class ContaGUI {
+
     Scanner sc = new Scanner(System.in);
     
-    public ClienteGUi(){}
+    public ContaGUI(){}
     
     public void cadastrar(){
-        System.out.print("Nome: ");
-        String nome = sc.next();
-        System.out.print("CPF: ");
-        String cpf = sc.next();
-        System.out.print("Sexo: ");
-        String sexo = sc.next();
+        System.out.print("Cliente: ");
+        String cliente = sc.nextInt();
+        System.out.print("Saldo: ");
+        String saldo = sc.next();
     
-        ClienteController cc = new ClienteController();
-        if (cc.cadastrar(nome, cpf, sexo)){
+        ContaController cc = new ContaController();
+        if (cc.cadastrar(cliente, saldo)){
             System.out.println("SUCESSO");
         } else {
             System.out.println("FALHA");
@@ -39,13 +36,15 @@ public class ClienteGUi{
 //        }  
 //    }
    
-    public static void listar(){
-        ClienteController cc = new ClienteController();
-        cc.listar();
-    }
+//    public static void listar(){
+//        ClienteController cc = new ClienteController();
+//        cc.listar();
+//    }
         
-//  public static void main(String[] args){}
-//    
+  public static void main(String[] args){}
+    
+    
+    
     
     
     
