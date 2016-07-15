@@ -19,4 +19,29 @@ public class ClienteController {
         }
         return false;
         }
-}
+    
+    public void listar(){
+        ClienteDao cdao = new ClienteDao();
+        for (Cliente c : cdao.buscarTudo()){
+            System.out.println(c.toString());      
+//            System.out.println(
+//                    "Id. " + c.getId() +
+//                    "\tCPF: " + c.getCpf()) +
+//                    "\tNome: " + c.getNome() +
+//                    "\tSexo: " + c.getSexo().getSigla()
+//            );
+        }
+    }
+    
+    //public boolean excluir(int id){
+    //    Cliente cliente = new Cliente(id);
+    //    ClienteDao cdao = new ClienteDao();
+    //        if (cdao.excluir(cliente)){
+    //            return true;
+    //        }
+    //    return false;
+    //    }
+}   
+    
+    
+

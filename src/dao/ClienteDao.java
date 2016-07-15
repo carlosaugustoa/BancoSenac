@@ -21,7 +21,7 @@ public class ClienteDao {
     
     public boolean inserir(Cliente cliente){
         if (db.connect()){
-            sql = "INSERT INTO tb_clientes(cli_nome, cli_cpf, cli_sexo_id) VALUES(?,?,?)";
+            sql = "INSERT INTO tb_clientes(cli_nome, cli_cpf, cli_sex_id) VALUES(?,?,?)";
             try {
                 ps = db.conexao.prepareStatement(sql);
                 ps.setString(1, cliente.getNome());
@@ -72,7 +72,7 @@ public boolean editar(Cliente cliente){
                 ps.setInt(3, cliente.getSexo().getId());
                 ps.setInt(4, cliente.getId());
                 if (ps.executeUpdate() == 1){
-                     ps.close();
+                    ps.close();
                     db.disconnect();
                     return true;
                 }
