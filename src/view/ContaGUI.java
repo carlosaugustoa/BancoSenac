@@ -11,7 +11,7 @@ public class ContaGUI {
     public ContaGUI(){}
     
     public void cadastrar(){
-        System.out.print("Cliente: ");
+        System.out.print("Cliente id: ");
         String cliente = sc.nextInt();
         System.out.print("Saldo: ");
         String saldo = sc.next();

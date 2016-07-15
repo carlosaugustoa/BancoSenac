@@ -7,10 +7,10 @@ import model.Cliente;
 
 public class ContaController {
 
-    public boolean cadastrar(int id, Float saldo){
+    public boolean cadastrar(String cliente, Float saldo){
         ClienteDao cdao = new ClienteDao();
-        if (cdao.buscarPorId(id) != null){
-            Cliente c = cdao.buscarPorId(id);
+        if (cdao.buscarPorId(cliente) != null){
+            Cliente c = cdao.buscarPorId(cliente);
             Conta conta = new model.Conta(c, saldo);
             ContaDao cntdao = new ContaDao();
             if (cntdao.inserir(conta)){
